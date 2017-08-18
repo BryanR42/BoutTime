@@ -7,18 +7,12 @@
 //
 
 import UIKit
-extension UILabel {
-    func roundCorners(corners:UIRectCorner, radius: CGFloat) {
-        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        let mask = CAShapeLayer()
-        mask.path = path.cgPath
-        self.layer.mask = mask
-    }
-}
+
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var EventLabel1: UILabel!
+    
+    @IBOutlet weak var EventButton1: UIButton!
     @IBOutlet weak var EventLabel2: UILabel!
     @IBOutlet weak var EventLabel3: UILabel!
     @IBOutlet weak var EventLabel4: UILabel!
@@ -37,8 +31,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-            EventLabel1.roundCorners(corners: [.topLeft , .bottomLeft], radius: 5)
-        
+       
         
     }
 

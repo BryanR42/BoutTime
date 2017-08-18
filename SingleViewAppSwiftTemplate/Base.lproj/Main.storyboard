@@ -38,24 +38,28 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="dht-QX-orn">
                                 <rect key="frame" x="40" y="40" width="334" height="558"/>
                                 <subviews>
-                                    <stackView clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZs-pU-9Ju">
+                                    <stackView clipsSubviews="YES" contentMode="scaleToFill" spacing="-10" translatesAutoresizingMaskIntoConstraints="NO" id="tZs-pU-9Ju">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="124.66666666666666"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Number One" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W6q-sT-rXs">
-                                                <rect key="frame" x="0.0" y="0.0" width="286.33333333333331" height="124.66666666666666"/>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="44w-2Z-sng">
+                                                <rect key="frame" x="0.0" y="0.0" width="295" height="124.66666666666666"/>
                                                 <color key="backgroundColor" red="0.99991267920000004" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <state key="normal" title="Event Button One"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgt-VR-Uwa">
-                                                <rect key="frame" x="286.33333333333326" y="0.0" width="47.666666666666686" height="124.66666666666666"/>
+                                                <rect key="frame" x="285" y="0.0" width="49" height="124.66666666666666"/>
                                                 <state key="normal" image="down_full"/>
                                                 <state key="selected" image="down_full_selected"/>
+                                                <state key="highlighted" image="down_full_selected"/>
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="W6q-sT-rXs" firstAttribute="width" secondItem="Mgt-VR-Uwa" secondAttribute="width" multiplier="6" constant="1" id="I4i-V5-mRJ"/>
+                                            <constraint firstItem="44w-2Z-sng" firstAttribute="width" secondItem="Mgt-VR-Uwa" secondAttribute="width" multiplier="6" constant="1" id="p0P-Wb-gWu"/>
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Esu-hV-w2d">
@@ -174,7 +178,7 @@
                         <outlet property="Down1Button" destination="Mgt-VR-Uwa" id="VFA-gs-UpI"/>
                         <outlet property="Down2Button" destination="Obm-Bw-6sV" id="bxJ-rN-Kyn"/>
                         <outlet property="Down3Button" destination="WKB-D4-L69" id="FNB-o6-Kdd"/>
-                        <outlet property="EventLabel1" destination="W6q-sT-rXs" id="Fao-mp-Ii7"/>
+                        <outlet property="EventButton1" destination="44w-2Z-sng" id="3MG-jG-Sqw"/>
                         <outlet property="EventLabel2" destination="MrF-wm-7Yf" id="Ege-gH-umI"/>
                         <outlet property="EventLabel3" destination="BwL-Se-GFP" id="VLv-Kk-Rvu"/>
                         <outlet property="EventLabel4" destination="0ad-9Z-oiE" id="f1d-ng-apE"/>
