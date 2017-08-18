@@ -13,9 +13,8 @@ class ViewController: UIViewController {
 
     
     @IBOutlet weak var EventButton1: UIButton!
-    @IBOutlet weak var EventLabel2: UILabel!
-    @IBOutlet weak var EventLabel3: UILabel!
-    @IBOutlet weak var EventLabel4: UILabel!
+    @IBOutlet weak var EventButton2: UIButton!
+
     
     @IBOutlet weak var Down1Button: UIButton!
     @IBOutlet weak var Down2Button: UIButton!
@@ -34,7 +33,9 @@ class ViewController: UIViewController {
        
         
     }
-
+    override func viewDidLayoutSubviews() {
+        EventButton1.round(corners: .topLeft, radius: 20)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
