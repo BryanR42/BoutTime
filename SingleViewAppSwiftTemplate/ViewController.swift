@@ -1,9 +1,9 @@
 //
-//  ViewController.swift
-//  SingleViewAppSwiftTemplate
+//  Events.swift
+//  BoutTime
 //
-//  Created by Treehouse on 12/8/16.
-//  Copyright © 2016 Treehouse. All rights reserved.
+//  Created by Bryan Richardson on 8/19/17.
+//  Copyright © 2017 Treehouse. All rights reserved.
 //
 
 import UIKit
