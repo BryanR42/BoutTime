@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 extension UIView {
+    // I did find this on StackOverflow but I had to play with it before I understood. Once I figured out how too use it, I ended up putting it back exactly as I found it.
     
     /**
      Rounds the given set of corners to the specified radius
@@ -20,7 +21,7 @@ extension UIView {
     func round(corners: UIRectCorner, radius: CGFloat) {
         _ = _round(corners: corners, radius: radius)
     }
-    
+
     /**
      Rounds the given set of corners to the specified radius with a border
      
@@ -52,6 +53,7 @@ extension UIView {
 
 private extension UIView {
     
+
     @discardableResult func _round(corners: UIRectCorner, radius: CGFloat) -> CAShapeLayer {
         let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         let mask = CAShapeLayer()

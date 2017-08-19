@@ -35,24 +35,19 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="dht-QX-orn">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="dht-QX-orn">
                                 <rect key="frame" x="40" y="40" width="334" height="557"/>
                                 <subviews>
-                                    <stackView clipsSubviews="YES" contentMode="scaleToFill" spacing="-10" translatesAutoresizingMaskIntoConstraints="NO" id="tZs-pU-9Ju">
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZs-pU-9Ju">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="124"/>
                                         <subviews>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="44w-2Z-sng">
-                                                <rect key="frame" x="0.0" y="0.0" width="295" height="124"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="286" height="124"/>
                                                 <color key="backgroundColor" red="0.99991267920000004" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Event Button One"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="5"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgt-VR-Uwa">
-                                                <rect key="frame" x="285" y="0.0" width="49" height="124"/>
+                                                <rect key="frame" x="286" y="0.0" width="48" height="124"/>
                                                 <state key="normal" image="down_full"/>
                                                 <state key="selected" image="down_full_selected"/>
                                                 <state key="highlighted" image="down_full_selected"/>
@@ -62,31 +57,28 @@
                                             <constraint firstItem="44w-2Z-sng" firstAttribute="width" secondItem="Mgt-VR-Uwa" secondAttribute="width" multiplier="6" constant="1" id="p0P-Wb-gWu"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="-10" translatesAutoresizingMaskIntoConstraints="NO" id="Esu-hV-w2d">
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Esu-hV-w2d">
                                         <rect key="frame" x="0.0" y="144" width="334" height="125"/>
                                         <subviews>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lVJ-Z8-Lj0" userLabel="Event Button2">
-                                                <rect key="frame" x="0.0" y="0.0" width="295" height="125"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="286" height="125"/>
                                                 <color key="backgroundColor" red="0.99991267920000004" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Event Button Two"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="5"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Cmo-T6-nrh">
-                                                <rect key="frame" x="285" y="0.0" width="49" height="125"/>
+                                                <rect key="frame" x="286" y="0.0" width="48" height="125"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nwy-ez-hT6">
-                                                        <rect key="frame" x="0.0" y="0.0" width="49" height="62"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="48" height="62"/>
                                                         <state key="normal" image="up_half"/>
                                                         <state key="selected" image="up_half_selected"/>
+                                                        <state key="highlighted" image="up_half_selected"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Obm-Bw-6sV">
-                                                        <rect key="frame" x="0.0" y="62" width="49" height="63"/>
+                                                        <rect key="frame" x="0.0" y="62" width="48" height="63"/>
                                                         <state key="normal" image="down_half"/>
                                                         <state key="selected" image="down_half_selected"/>
+                                                        <state key="highlighted" image="down_half_selected"/>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -95,31 +87,28 @@
                                             <constraint firstItem="lVJ-Z8-Lj0" firstAttribute="width" secondItem="nwy-ez-hT6" secondAttribute="width" multiplier="6" constant="1" id="uz5-q2-cvi"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="-10" translatesAutoresizingMaskIntoConstraints="NO" id="MAC-tk-LBO">
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MAC-tk-LBO">
                                         <rect key="frame" x="0.0" y="289" width="334" height="124"/>
                                         <subviews>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mte-Zt-yj7" userLabel="Event Button3">
-                                                <rect key="frame" x="0.0" y="0.0" width="295" height="124"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="286" height="124"/>
                                                 <color key="backgroundColor" red="0.99991267920000004" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Event Button Three"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="5"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cNo-Py-kYt">
-                                                <rect key="frame" x="285" y="0.0" width="49" height="124"/>
+                                                <rect key="frame" x="286" y="0.0" width="48" height="124"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aht-OT-Nhu">
-                                                        <rect key="frame" x="0.0" y="0.0" width="49" height="62"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="48" height="62"/>
                                                         <state key="normal" image="up_half"/>
                                                         <state key="selected" image="up_half_selected"/>
+                                                        <state key="highlighted" image="up_half_selected"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WKB-D4-L69">
-                                                        <rect key="frame" x="0.0" y="62" width="49" height="62"/>
+                                                        <rect key="frame" x="0.0" y="62" width="48" height="62"/>
                                                         <state key="normal" image="down_half"/>
                                                         <state key="selected" image="down_half_selected"/>
+                                                        <state key="highlighted" image="down_half_selected"/>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -128,23 +117,19 @@
                                             <constraint firstItem="Mte-Zt-yj7" firstAttribute="width" secondItem="aht-OT-Nhu" secondAttribute="width" multiplier="6" constant="1" id="rPs-lB-WUc"/>
                                         </constraints>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="-10" translatesAutoresizingMaskIntoConstraints="NO" id="QIf-9s-hAa">
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QIf-9s-hAa">
                                         <rect key="frame" x="0.0" y="433" width="334" height="124"/>
                                         <subviews>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eaA-qc-GxF" userLabel="Event Button4">
-                                                <rect key="frame" x="0.0" y="0.0" width="295" height="124"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="286" height="124"/>
                                                 <color key="backgroundColor" red="0.99991267920000004" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Event Button Four"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="5"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yhb-61-i7e">
-                                                <rect key="frame" x="285" y="0.0" width="49" height="124"/>
+                                                <rect key="frame" x="286" y="0.0" width="48" height="124"/>
                                                 <state key="normal" image="up_full"/>
                                                 <state key="selected" image="up_full_selected"/>
+                                                <state key="highlighted" image="up_full_selected"/>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -152,12 +137,6 @@
                                         </constraints>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.1541736424" green="0.37689369919999999" blue="0.49723780159999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="15"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.035400457680225372" green="0.16068699955940247" blue="0.29582324624061584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -180,6 +159,8 @@
                         <outlet property="Down3Button" destination="WKB-D4-L69" id="FNB-o6-Kdd"/>
                         <outlet property="EventButton1" destination="44w-2Z-sng" id="3MG-jG-Sqw"/>
                         <outlet property="EventButton2" destination="lVJ-Z8-Lj0" id="pqe-ww-kcT"/>
+                        <outlet property="EventButton3" destination="Mte-Zt-yj7" id="Geb-Ak-Ivk"/>
+                        <outlet property="EventButton4" destination="eaA-qc-GxF" id="gxw-Sh-Peb"/>
                         <outlet property="Up2Button" destination="nwy-ez-hT6" id="5lc-XE-Gco"/>
                         <outlet property="Up3Button" destination="aht-OT-Nhu" id="sxn-dg-H58"/>
                         <outlet property="Up4Button" destination="yhb-61-i7e" id="H6b-Se-OFZ"/>
