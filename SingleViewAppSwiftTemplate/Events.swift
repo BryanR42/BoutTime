@@ -7,3 +7,29 @@
 //
 
 import Foundation
+
+
+
+protocol SingleEvent {
+    var eventName: String { get }
+    var eventDate: Date { get }
+    var webAddress: URL { get }
+}
+
+struct Event: SingleEvent {
+    let eventName: String
+    let eventDate: Date
+    let webAddress: URL
+}
+
+struct EventList {
+    var eventList: [SingleEvent]
+    
+    
+}
+
+
+
+
+
+
