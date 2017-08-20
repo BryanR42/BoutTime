@@ -25,8 +25,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var Up3Button: UIButton!
     @IBOutlet weak var Up4Button: UIButton!
  
-
+    let listOfEvents: [SingleEvent]
     
+    required init?(coder aDecoder: NSCoder) {
+        do {
+            let dictionary = try PlistConverter.dictionary(fromFile: "EventData", ofType: "plist")
+            let listOfEvents = try EventListUnarchiver.eventList(fromDictionary: dictionary)
+            self.listOfEvents = listOfEvents
+        } catch let error {
+            fatalError("\(error)")
+        }
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

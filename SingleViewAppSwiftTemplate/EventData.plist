@@ -14,11 +14,11 @@
 	<key>Event2</key>
 	<dict>
 		<key>name</key>
-		<string>&quot;Event 2&quot;</string>
+		<string>&quot;Chuck Yeager Breaks the Sound Barrier&quot;</string>
 		<key>date</key>
-		<date>1974-12-22T17:00:00Z</date>
+		<date>1947-10-14T17:00:00Z</date>
 		<key>url</key>
-		<string>&quot;https://www.google.com&quot;</string>
+		<string>&quot;http://www.chuckyeager.com&quot;</string>
 	</dict>
 	<key>Event1</key>
 	<dict>
