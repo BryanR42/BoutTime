@@ -7,22 +7,43 @@
 //
 
 import Foundation
-
+import GameKit
 
 
 protocol SingleEvent {
     var eventName: String { get }
     var eventDate: Date { get }
-    var webAddress: URL { get }
-}
-/*
-struct Event: SingleEvent {
-    let eventName: String
-    let eventDate: Date
-    let webAddress: URL
-}
-*/
+    var webAddress: String { get }
+    var shownBefore: Bool { get set }
 
+}
+struct Event: SingleEvent {
+    var eventName: String
+    var eventDate: Date
+    var webAddress: String
+    var shownBefore: Bool = false
+    
+}
+
+
+struct EventList {
+    var listOfEvents: [Event]
+    
+    func randomRound() -> [Event] {
+        var tempListOfEvents = listOfEvents
+        var roundEventList: [Event] = []
+        while roundEventList.count < 4 {
+            var randomIndex = GKRandomSource.sharedRandom().nextInt(upperBound: tempListOfEvents.count)
+            while tempListOfEvents[randomIndex].shownBefore == true {
+                randomIndex = GKRandomSource.sharedRandom().nextInt(upperBound: tempListOfEvents.count)
+            }
+            tempListOfEvents[randomIndex].shownBefore = true
+            roundEventList.append(tempListOfEvents[randomIndex])
+        }
+        return roundEventList
+    }
+    
+}
 
 enum ListError: Error {
     case invalidFile
@@ -30,28 +51,49 @@ enum ListError: Error {
 }
 
 class PlistConverter {
-    static func dictionary(fromFile name: String, ofType type: String) throws -> [String: AnyObject] {
+    static func dictionary(fromFile name: String, ofType type: String) throws -> [[String: Any]] {
         guard let path = Bundle.main.path(forResource: name, ofType: type) else {
             throw ListError.invalidFile
         }
-        guard let dictionary = NSDictionary(contentsOfFile: path) as? [String: AnyObject] else {
+        guard let dictionary = NSArray(contentsOfFile: path) as? [[String: Any]] else {
             throw ListError.conversionFailure
         }
         return dictionary
     }
 }
 class EventListUnarchiver {
-    static func eventList(fromDictionary dictionary: [String: AnyObject]) throws -> [SingleEvent] {
-        var listOfEvents: [SingleEvent] = []
+    static func eventList(fromDictionary dictionary: [[String: Any]]) throws -> [Event] {
+        var listOfEvents: [Event] = []
         
-        for (key, value) in dictionary {
-            if let eventDictionary = value as? [String: Any], let eventName = eventDictionary["name"] as? String, let eventDate = eventDictionary["date"] as? Date, let webAddress = eventDictionary["url"] {
-                let event = SingleEvent(eventName: eventName, eventDate: eventDate, webAddress: webAddress)
+        for value in dictionary {
+            let eventDictionary = value
+            if let eventName = eventDictionary["name"] as? String, let eventDate = eventDictionary["date"] as? Date, let webAddress = eventDictionary["url"] as? String {
+                let event = Event(eventName: eventName, eventDate: eventDate, webAddress: webAddress, shownBefore: false)
                 
-                }
+                
                 listOfEvents.append(event)
             }
+        }
     return listOfEvents
     }
 }
+func findEarliest(in list: [Event]) -> Int {
+    var earliestIndex = 0
+    for i in 1..<list.count {
+        if list[i].eventDate < list[earliestIndex].eventDate {
+            earliestIndex = i
+        }
+    }
+    return earliestIndex
+}
 
+func sortEvents(in list: [Event]) -> [Event] {
+    var copyOfEventList = list
+    var sortedEventList: [Event] = []
+    for _ in 1...list.count {
+        let earliest = findEarliest(in: copyOfEventList)
+        sortedEventList.append(copyOfEventList[earliest])
+        copyOfEventList.remove(at: earliest)
+    }
+    return sortedEventList
+}

@@ -25,22 +25,29 @@ class ViewController: UIViewController {
     @IBOutlet weak var Up3Button: UIButton!
     @IBOutlet weak var Up4Button: UIButton!
  
-    let listOfEvents: [SingleEvent]
+    var listOfEvents: EventList
+    var score = 0
+    var currentAnswerKey: [Event] = []
+    var currentRoundEvents: [Event] = []
     
     required init?(coder aDecoder: NSCoder) {
         do {
             let dictionary = try PlistConverter.dictionary(fromFile: "EventData", ofType: "plist")
             let listOfEvents = try EventListUnarchiver.eventList(fromDictionary: dictionary)
-            self.listOfEvents = listOfEvents
+            self.listOfEvents = EventList(listOfEvents: listOfEvents)
         } catch let error {
             fatalError("\(error)")
         }
         super.init(coder: aDecoder)
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+
+        
+        newRound()
         
         
     }
@@ -61,8 +68,23 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+
+    func updateButtonDisplay() {
+        EventButton1.setTitle(currentRoundEvents[0].eventName, for: .normal)
+        EventButton2.setTitle(currentRoundEvents[1].eventName, for: .normal)
+        EventButton3.setTitle(currentRoundEvents[2].eventName, for: .normal)
+        EventButton4.setTitle(currentRoundEvents[3].eventName, for: .normal)
+    }
     
-    
+    func newRound() {
+        currentRoundEvents = listOfEvents.randomRound()
+        currentAnswerKey = sortEvents(in: currentRoundEvents)
+        updateButtonDisplay()
+        
+        
+    }
+
 
 
 }

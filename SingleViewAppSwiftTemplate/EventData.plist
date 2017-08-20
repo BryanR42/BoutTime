@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict>
-	<key>Event3</key>
+<array>
 	<dict>
-		<key>name</key>
-		<string>&quot;Event 3&quot;</string>
-		<key>date</key>
-		<date>1974-12-02T17:00:00Z</date>
 		<key>url</key>
-		<string>&quot;https://www.google.com&quot;</string>
+		<string>&quot;www.google.com&quot;</string>
+		<key>date</key>
+		<date>1201-01-01T16:56:02Z</date>
+		<key>name</key>
+		<string>&quot;Event4&quot;</string>
 	</dict>
-	<key>Event2</key>
 	<dict>
+		<key>url</key>
+		<string>&quot;http://www.ChuckYeager.com&quot;</string>
+		<key>date</key>
+		<date>1948-10-14T17:00:00Z</date>
 		<key>name</key>
 		<string>&quot;Chuck Yeager Breaks the Sound Barrier&quot;</string>
-		<key>date</key>
-		<date>1947-10-14T17:00:00Z</date>
-		<key>url</key>
-		<string>&quot;http://www.chuckyeager.com&quot;</string>
 	</dict>
-	<key>Event1</key>
 	<dict>
 		<key>name</key>
 		<string>&quot;The First Hot Air Balloon&quot;</string>
@@ -29,7 +26,6 @@
 		<key>url</key>
 		<string>&quot;https://en.wikipedia.org/wiki/Hot_air_balloon&quot;</string>
 	</dict>
-	<key>Event0</key>
 	<dict>
 		<key>name</key>
 		<string>&quot;The Wright Brothers: First Powered Flight&quot;</string>
@@ -38,5 +34,5 @@
 		<key>url</key>
 		<string>&quot;https://en.wikipedia.org/wiki/Wright_brothers&quot;</string>
 	</dict>
-</dict>
+</array>
 </plist>
