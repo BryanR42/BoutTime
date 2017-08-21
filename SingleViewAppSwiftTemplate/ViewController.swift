@@ -18,6 +18,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var EventButton4: UIButton!
 
     
+    @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var Down1Button: UIButton!
     @IBOutlet weak var Down2Button: UIButton!
     @IBOutlet weak var Down3Button: UIButton!
@@ -29,7 +30,10 @@ class ViewController: UIViewController {
     var score = 0
     var currentAnswerKey: [Event] = []
     var currentRoundEvents: [Event] = []
+    var countDownClock: Int = 0
+    var timer = Timer()
     
+    // importing the Plist for the list of events
     required init?(coder aDecoder: NSCoder) {
         do {
             let dictionary = try PlistConverter.dictionary(fromFile: "EventData", ofType: "plist")
@@ -51,6 +55,7 @@ class ViewController: UIViewController {
         
         
     }
+    // make the buttons look pretty by applying masks to the corners. This had to be done after the buttons were constrained.
     override func viewDidLayoutSubviews() {
         let radii = EventButton1.frame.size.height / 15
         EventButton1.round(corners: [.bottomLeft, .topLeft], radius: radii)
@@ -68,21 +73,47 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    // update the display
     func updateButtonDisplay() {
-        EventButton1.setTitle(currentRoundEvents[0].eventName, for: .normal)
-        EventButton2.setTitle(currentRoundEvents[1].eventName, for: .normal)
-        EventButton3.setTitle(currentRoundEvents[2].eventName, for: .normal)
-        EventButton4.setTitle(currentRoundEvents[3].eventName, for: .normal)
+        let buttons = [EventButton1, EventButton2, EventButton3, EventButton4]
+        var count = 0
+        for eachButton in buttons {
+            eachButton!.setTitle(currentRoundEvents[count].eventName, for: .normal)
+            count += 1
+        }
     }
     
     func newRound() {
         currentRoundEvents = listOfEvents.randomRound()
         currentAnswerKey = sortEvents(in: currentRoundEvents)
         updateButtonDisplay()
-        
-        
+        // start the clock
+        countDownClock = 30
+        timerLabel.isHidden = false
+        timerLabel.text = String(countDownClock) + " Sec"
+        timer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(ViewController.updateTimer), userInfo: nil, repeats: true)
+
+    }
+    func updateTimer() {
+        countDownClock -= 1
+        timerLabel.text = String("0:\(countDownClock)")
+        if countDownClock == 0 {
+           print("End")
+        }
+    }
+    // update the current round event list when the reordering buttons are pressed
+    @IBAction func reorderButton(_ sender: UIButton) {
+        switch sender {
+        case Down1Button, Up2Button:
+            currentRoundEvents.insert(currentRoundEvents.remove(at: 0), at: 1)
+        case Down2Button, Up3Button:
+            currentRoundEvents.insert(currentRoundEvents.remove(at: 1), at: 2)
+        case Down3Button, Up4Button:
+            currentRoundEvents.insert(currentRoundEvents.remove(at: 2), at: 3)
+        default: print("No Button Pressed")
+        }
+        updateButtonDisplay()
     }
 
 

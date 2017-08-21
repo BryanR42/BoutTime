@@ -4,11 +4,59 @@
 <array>
 	<dict>
 		<key>url</key>
-		<string>&quot;www.google.com&quot;</string>
+		<string>&quot;https://en.wikipedia.org/wiki/Hughes_H-4_Hercules&quot;</string>
 		<key>date</key>
-		<date>1201-01-01T16:56:02Z</date>
+		<date>1947-11-02T17:00:00Z</date>
 		<key>name</key>
-		<string>&quot;Event4&quot;</string>
+		<string>&quot;Howard Hughes Flies the Spruce Goose&quot;</string>
+	</dict>
+	<dict>
+		<key>url</key>
+		<string>https://en.wikipedia.org/wiki/Apollo_11</string>
+		<key>date</key>
+		<date>1969-07-21T00:18:00Z</date>
+		<key>name</key>
+		<string>&quot;Man First Steps on the Moon&quot;</string>
+	</dict>
+	<dict>
+		<key>url</key>
+		<string>&quot;https://en.wikipedia.org/wiki/Voyager_1&quot;</string>
+		<key>date</key>
+		<string>August 25, 2012 12:00:00</string>
+		<key>name</key>
+		<string>&quot;Voayger 1 Leaves the Solar System and Enters Interstellar Space&quot;</string>
+	</dict>
+	<dict>
+		<key>url</key>
+		<string>&quot;https://en.wikipedia.org/wiki/Sputnik_1&quot;</string>
+		<key>date</key>
+		<date>1957-10-04T16:00:00Z</date>
+		<key>name</key>
+		<string>&quot;Sputnik, First Artificial Satellite&quot;</string>
+	</dict>
+	<dict>
+		<key>url</key>
+		<string>&quot;https://en.wikipedia.org/wiki/Yuri_Gagarin&quot;</string>
+		<key>date</key>
+		<date>1961-04-12T17:00:00Z</date>
+		<key>name</key>
+		<string>&quot;Yuri Gagarin Becomes First Man in Space&quot;</string>
+	</dict>
+	<dict>
+		<key>url</key>
+		<string>&quot;https://en.wikipedia.org/wiki/Space_Shuttle_Columbia&quot;</string>
+		<key>date</key>
+		<date>1981-04-12T17:00:00Z</date>
+		<key>name</key>
+		<string>&quot;First Space Shuttle Flight&quot;</string>
+	</dict>
+	<dict>
+		<key>url</key>
+		<string>&quot;https://en.wikipedia.org/wiki/Spirit_of_St._Louis&quot;</string>
+		<key>date</key>
+		<date>1927-05-20T16:00:00Z</date>
+		<key>name</key>
+		<string>&quot;First Nonstop Trans-Atlantic Flight&quot;</string>
 	</dict>
 	<dict>
 		<key>url</key>

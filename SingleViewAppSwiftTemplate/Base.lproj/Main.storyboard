@@ -51,6 +51,9 @@
                                                 <state key="normal" image="down_full"/>
                                                 <state key="selected" image="down_full_selected"/>
                                                 <state key="highlighted" image="down_full_selected"/>
+                                                <connections>
+                                                    <action selector="reorderButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HJk-jh-qad"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -73,12 +76,18 @@
                                                         <state key="normal" image="up_half"/>
                                                         <state key="selected" image="up_half_selected"/>
                                                         <state key="highlighted" image="up_half_selected"/>
+                                                        <connections>
+                                                            <action selector="reorderButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PSp-ff-sT0"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Obm-Bw-6sV">
                                                         <rect key="frame" x="0.0" y="62" width="48" height="63"/>
                                                         <state key="normal" image="down_half"/>
                                                         <state key="selected" image="down_half_selected"/>
                                                         <state key="highlighted" image="down_half_selected"/>
+                                                        <connections>
+                                                            <action selector="reorderButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rDT-GJ-VGX"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -103,12 +112,18 @@
                                                         <state key="normal" image="up_half"/>
                                                         <state key="selected" image="up_half_selected"/>
                                                         <state key="highlighted" image="up_half_selected"/>
+                                                        <connections>
+                                                            <action selector="reorderButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CWX-iG-Nra"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WKB-D4-L69">
                                                         <rect key="frame" x="0.0" y="62" width="48" height="62"/>
                                                         <state key="normal" image="down_half"/>
                                                         <state key="selected" image="down_half_selected"/>
                                                         <state key="highlighted" image="down_half_selected"/>
+                                                        <connections>
+                                                            <action selector="reorderButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EQq-Xi-FXj"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -130,6 +145,9 @@
                                                 <state key="normal" image="up_full"/>
                                                 <state key="selected" image="up_full_selected"/>
                                                 <state key="highlighted" image="up_full_selected"/>
+                                                <connections>
+                                                    <action selector="reorderButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4qc-C0-jkW"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -164,6 +182,7 @@
                         <outlet property="Up2Button" destination="nwy-ez-hT6" id="5lc-XE-Gco"/>
                         <outlet property="Up3Button" destination="aht-OT-Nhu" id="sxn-dg-H58"/>
                         <outlet property="Up4Button" destination="yhb-61-i7e" id="H6b-Se-OFZ"/>
+                        <outlet property="timerLabel" destination="Hn2-8J-fZ3" id="LPC-D0-Quo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
