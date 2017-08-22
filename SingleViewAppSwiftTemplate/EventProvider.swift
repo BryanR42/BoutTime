@@ -29,15 +29,15 @@ struct Event: SingleEvent {
 struct EventList {
     var listOfEvents: [Event]
     
-    func randomRound() -> [Event] {
+    mutating func randomRound() -> [Event] {
         var tempListOfEvents = listOfEvents
         var roundEventList: [Event] = []
         while roundEventList.count < 4 {
             var randomIndex = GKRandomSource.sharedRandom().nextInt(upperBound: tempListOfEvents.count)
-            while tempListOfEvents[randomIndex].shownBefore == true {
+            while self.listOfEvents[randomIndex].shownBefore == true {
                 randomIndex = GKRandomSource.sharedRandom().nextInt(upperBound: tempListOfEvents.count)
             }
-            tempListOfEvents[randomIndex].shownBefore = true
+            self.listOfEvents[randomIndex].shownBefore = true
             roundEventList.append(tempListOfEvents[randomIndex])
         }
         return roundEventList

@@ -54,13 +54,13 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
-        
         newRound()
         
         
     }
-    // make the buttons look pretty by applying masks to the corners. This had to be done after the buttons were constrained.
+    
+    
+        // make the buttons look pretty by applying masks to the corners. This had to be done after the buttons were constrained.
     override func viewDidLayoutSubviews() {
         let radii = eventButton1.frame.size.height / 15
         eventButton1.round(corners: [.bottomLeft, .topLeft], radius: radii)
@@ -79,22 +79,21 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // update the display
-    func updateButtonDisplay() {
-        let buttons = [eventButton1, eventButton2, eventButton3, eventButton4]
-        var count = 0
-        for eachButton in buttons {
-            guard let thisButton = eachButton else {
-                break
-            }
-            thisButton.setTitle(currentRoundEvents[count].eventName, for: .normal)
-            thisButton.setTitleColor(colorProvider.getUIColor(for: ColorNames.Teal), for: .normal)
-            thisButton.backgroundColor = colorProvider.getUIColor(for: ColorNames.White)
-            count += 1
-            }
+    @IBOutlet weak var shakeLabel: UILabel!
+    
+    override func becomeFirstResponder() -> Bool {
+        return true
+    }
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            if !timerLabel.isHidden {
+            checkAnswers()
         }
+    }
+    }
     
     
+    // set up a new round. Get 4 random events, start timer and update display
     func newRound() {
         currentRoundEvents = listOfEvents.randomRound()
         currentAnswerKey = sortEvents(in: currentRoundEvents)
@@ -103,14 +102,18 @@ class ViewController: UIViewController {
         endRoundButton.isEnabled = false
 
         updateButtonDisplay()
-        // start the clock
+        
         countDownClock = 30
         timerLabel.isHidden = false
         timerLabel.text = String("1:00")
         timer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(ViewController.updateTimer), userInfo: nil, repeats: true)
 
     }
+    // loop through each event and compare with the sorted answer key. Any wrong answer = fail
+    // color the buttons so the player knows which events are out of order
     func checkAnswers() {
+        timer.invalidate()
+        timerLabel.isHidden = true
         let buttons = [eventButton1, eventButton2, eventButton3, eventButton4]
         var passed: Bool = true
         for i in 0..<currentRoundEvents.count {
@@ -131,18 +134,6 @@ class ViewController: UIViewController {
         endRoundButton.isHidden = false
         endRoundButton.isEnabled = true
     }
-    func updateTimer() {
-        countDownClock -= 1
-        if countDownClock < 10 {
-            timerLabel.text = "0:0\(countDownClock)"
-        } else {
-            timerLabel.text = "0:\(countDownClock)"
-        }
-        if countDownClock == 0 {
-            timerLabel.isHidden = true
-            checkAnswers()
-        }
-    }
     // update the current round event list when the reordering buttons are pressed
     @IBAction func reorderButton(_ sender: UIButton) {
         switch sender {
@@ -156,7 +147,46 @@ class ViewController: UIViewController {
         }
         updateButtonDisplay()
     }
-
+    
+    
+    @IBAction func EndRound() {
+        if currentRoundNumber < numberOfRounds {
+            newRound()
+        } else {
+            // FIXME: End game sequence
+        }
+        
+        
+    }
+    
+// Helper Functions
+    
+    // update the display
+    func updateButtonDisplay() {
+        let buttons: [UIButton] = [eventButton1, eventButton2, eventButton3, eventButton4]
+        // reset each button to the current event order and reset button colors.
+        for eachButton in buttons {
+            if let index = buttons.index(of: eachButton) {
+                eachButton.setTitle(currentRoundEvents[index].eventName, for: .normal)
+            }
+            eachButton.setTitleColor(colorProvider.getUIColor(for: ColorNames.Teal), for: .normal)
+            eachButton.backgroundColor = colorProvider.getUIColor(for: ColorNames.White)
+        }
+    }
+    
+    func updateTimer() {
+        countDownClock -= 1
+        // need to learn a formatting option?
+        if countDownClock < 10 {
+            timerLabel.text = "0:0\(countDownClock)"
+        } else {
+            timerLabel.text = "0:\(countDownClock)"
+        }
+        // time runs out, stop the clock and fire the answer checker
+        if countDownClock == 0 {
+            checkAnswers()
+        }
+    }
 
 
 }

@@ -38,6 +38,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cqf-Ka-4Lg">
                                 <rect key="frame" x="36" y="549" width="303" height="60.5"/>
                                 <state key="normal" title="EndRoundButton" image="next_round_success"/>
+                                <connections>
+                                    <action selector="EndRound" destination="BYZ-38-t0r" eventType="touchUpInside" id="x16-p9-Rrm"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="dht-QX-orn">
                                 <rect key="frame" x="36" y="40" width="303" height="489"/>
@@ -193,6 +196,7 @@
                         <outlet property="Up3Button" destination="aht-OT-Nhu" id="sxn-dg-H58"/>
                         <outlet property="Up4Button" destination="yhb-61-i7e" id="H6b-Se-OFZ"/>
                         <outlet property="endRoundButton" destination="Cqf-Ka-4Lg" id="cgq-Py-gEs"/>
+                        <outlet property="shakeLabel" destination="LHF-ro-icq" id="Coi-vW-Odn"/>
                         <outlet property="timerLabel" destination="Hn2-8J-fZ3" id="LPC-D0-Quo"/>
                     </connections>
                 </viewController>
