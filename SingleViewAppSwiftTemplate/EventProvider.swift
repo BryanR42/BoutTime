@@ -24,23 +24,44 @@ struct Event: SingleEvent {
     var shownBefore: Bool = false
     
 }
-
-
-struct EventList {
+protocol EventList {
+    var listOfEvents: [Event] { get set }
+    
+}
+struct RoundList: EventList {
     var listOfEvents: [Event]
     
-    mutating func randomRound() -> [Event] {
-        var tempListOfEvents = listOfEvents
+    func sortEvents(in list: RoundList) -> RoundList {
+        var copyOfEventList = list.listOfEvents
+        var sortedEventList: [Event] = []
+        for _ in 1...list.listOfEvents.count {
+            let earliest = findEarliest(in: copyOfEventList)
+            sortedEventList.append(copyOfEventList[earliest])
+            copyOfEventList.remove(at: earliest)
+        }
+        return RoundList(listOfEvents: sortedEventList)
+    }
+}
+
+struct MasterEventList: EventList {
+    var listOfEvents: [Event]
+    var questionsAsked: Int = 0
+    
+    mutating func randomRound() throws -> RoundList {
+        if questionsAsked > self.listOfEvents.count - 4 {
+            throw ListError.insufficientQuestions
+        }
         var roundEventList: [Event] = []
         while roundEventList.count < 4 {
-            var randomIndex = GKRandomSource.sharedRandom().nextInt(upperBound: tempListOfEvents.count)
+            var randomIndex = GKRandomSource.sharedRandom().nextInt(upperBound: listOfEvents.count)
             while self.listOfEvents[randomIndex].shownBefore == true {
-                randomIndex = GKRandomSource.sharedRandom().nextInt(upperBound: tempListOfEvents.count)
+                randomIndex = GKRandomSource.sharedRandom().nextInt(upperBound: listOfEvents.count)
             }
             self.listOfEvents[randomIndex].shownBefore = true
-            roundEventList.append(tempListOfEvents[randomIndex])
+            questionsAsked += 1
+            roundEventList.append(listOfEvents[randomIndex])
         }
-        return roundEventList
+        return RoundList(listOfEvents: roundEventList)
     }
     
 }
@@ -48,6 +69,7 @@ struct EventList {
 enum ListError: Error {
     case invalidFile
     case conversionFailure
+    case insufficientQuestions
 }
 
 class PlistConverter {
@@ -77,6 +99,7 @@ class EventListUnarchiver {
     return listOfEvents
     }
 }
+
 func findEarliest(in list: [Event]) -> Int {
     var earliestIndex = 0
     for i in 1..<list.count {
@@ -87,13 +110,4 @@ func findEarliest(in list: [Event]) -> Int {
     return earliestIndex
 }
 
-func sortEvents(in list: [Event]) -> [Event] {
-    var copyOfEventList = list
-    var sortedEventList: [Event] = []
-    for _ in 1...list.count {
-        let earliest = findEarliest(in: copyOfEventList)
-        sortedEventList.append(copyOfEventList[earliest])
-        copyOfEventList.remove(at: earliest)
-    }
-    return sortedEventList
-}
+

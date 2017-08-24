@@ -27,13 +27,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var up3Button: UIButton!
     @IBOutlet weak var up4Button: UIButton!
  
-    var listOfEvents: EventList
+    var listOfEvents: MasterEventList
     let colorProvider = ColorProvider()
     let numberOfRounds: Int = 6
     var currentRoundNumber: Int = 0
     var score: Int = 0
-    var currentAnswerKey: [Event] = []
-    var currentRoundEvents: [Event] = []
+    var currentAnswerKey = RoundList(listOfEvents: [])
+    var currentRoundEvents = RoundList(listOfEvents: [])
     var countDownClock: Int = 0
     var timer = Timer()
     
@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         do {
             let dictionary = try PlistConverter.dictionary(fromFile: "EventData", ofType: "plist")
             let listOfEvents = try EventListUnarchiver.eventList(fromDictionary: dictionary)
-            self.listOfEvents = EventList(listOfEvents: listOfEvents)
+            self.listOfEvents = MasterEventList(listOfEvents: listOfEvents, questionsAsked: 0)
         } catch let error {
             fatalError("\(error)")
         }
@@ -95,8 +95,9 @@ class ViewController: UIViewController {
     
     // set up a new round. Get 4 random events, start timer and update display
     func newRound() {
-        currentRoundEvents = listOfEvents.randomRound()
-        currentAnswerKey = sortEvents(in: currentRoundEvents)
+        do {
+        currentRoundEvents = try listOfEvents.randomRound()
+        currentAnswerKey = currentRoundEvents.sortEvents(in: currentRoundEvents)
         currentRoundNumber += 1
         endRoundButton.isHidden = true
         endRoundButton.isEnabled = false
@@ -107,7 +108,9 @@ class ViewController: UIViewController {
         timerLabel.isHidden = false
         timerLabel.text = String("1:00")
         timer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(ViewController.updateTimer), userInfo: nil, repeats: true)
-
+        } catch let error {
+            fatalError("\(error)")
+        }
     }
     // loop through each event and compare with the sorted answer key. Any wrong answer = fail
     // color the buttons so the player knows which events are out of order
@@ -116,8 +119,8 @@ class ViewController: UIViewController {
         timerLabel.isHidden = true
         let buttons = [eventButton1, eventButton2, eventButton3, eventButton4]
         var passed: Bool = true
-        for i in 0..<currentRoundEvents.count {
-            if currentRoundEvents[i].eventName != currentAnswerKey[i].eventName {
+        for i in 0..<currentRoundEvents.listOfEvents.count {
+            if currentRoundEvents.listOfEvents[i].eventName != currentAnswerKey.listOfEvents[i].eventName {
                 passed = false
                 endRoundButton.setImage(#imageLiteral(resourceName: "next_round_fail"), for: .normal)
                 buttons[i]?.setTitleColor(colorProvider.getUIColor(for: ColorNames.Black), for: .normal)
@@ -125,7 +128,7 @@ class ViewController: UIViewController {
             } else {
                 buttons[i]?.setTitleColor(colorProvider.getUIColor(for: ColorNames.Black), for: .normal)
                 buttons[i]?.backgroundColor = colorProvider.getUIColor(for: ColorNames.Green)
-                if i == currentRoundEvents.count - 1 && passed == true {
+                if i == currentRoundEvents.listOfEvents.count - 1 && passed == true {
                     endRoundButton.setImage(#imageLiteral(resourceName: "next_round_success"), for: .normal)
                     score += 1
                 }
@@ -138,11 +141,11 @@ class ViewController: UIViewController {
     @IBAction func reorderButton(_ sender: UIButton) {
         switch sender {
         case down1Button, up2Button:
-            currentRoundEvents.insert(currentRoundEvents.remove(at: 0), at: 1)
+            currentRoundEvents.listOfEvents.insert(currentRoundEvents.listOfEvents.remove(at: 0), at: 1)
         case down2Button, up3Button:
-            currentRoundEvents.insert(currentRoundEvents.remove(at: 1), at: 2)
+            currentRoundEvents.listOfEvents.insert(currentRoundEvents.listOfEvents.remove(at: 1), at: 2)
         case down3Button, up4Button:
-            currentRoundEvents.insert(currentRoundEvents.remove(at: 2), at: 3)
+            currentRoundEvents.listOfEvents.insert(currentRoundEvents.listOfEvents.remove(at: 2), at: 3)
         default: print("No Button Pressed")
         }
         updateButtonDisplay()
@@ -167,7 +170,7 @@ class ViewController: UIViewController {
         // reset each button to the current event order and reset button colors.
         for eachButton in buttons {
             if let index = buttons.index(of: eachButton) {
-                eachButton.setTitle(currentRoundEvents[index].eventName, for: .normal)
+                eachButton.setTitle(currentRoundEvents.listOfEvents[index].eventName, for: .normal)
             }
             eachButton.setTitleColor(colorProvider.getUIColor(for: ColorNames.Teal), for: .normal)
             eachButton.backgroundColor = colorProvider.getUIColor(for: ColorNames.White)

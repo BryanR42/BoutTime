@@ -10,6 +10,7 @@
 		1FB2AABD1F48955700E657EF /* EventProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2AABC1F48955700E657EF /* EventProvider.swift */; };
 		1FB2AAC11F48BF3300E657EF /* EventData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FB2AAC01F48BF3300E657EF /* EventData.plist */; };
 		1FB93A6F1F4BBA29009DC2E8 /* ColorProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB93A6E1F4BBA29009DC2E8 /* ColorProvider.swift */; };
+		1FB93A711F4CF403009DC2E8 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB93A701F4CF402009DC2E8 /* WebViewController.swift */; };
 		1FC4B5A91F47AD2C001035B4 /* Corners.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC4B5A81F47AD2C001035B4 /* Corners.swift */; };
 		3A8AADC91DF9B85E00A2B931 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8AADC81DF9B85E00A2B931 /* AppDelegate.swift */; };
 		3A8AADCB1DF9B85E00A2B931 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8AADCA1DF9B85E00A2B931 /* ViewController.swift */; };
@@ -41,6 +42,7 @@
 		1FB2AABC1F48955700E657EF /* EventProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventProvider.swift; sourceTree = "<group>"; };
 		1FB2AAC01F48BF3300E657EF /* EventData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = EventData.plist; sourceTree = "<group>"; };
 		1FB93A6E1F4BBA29009DC2E8 /* ColorProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorProvider.swift; sourceTree = "<group>"; };
+		1FB93A701F4CF402009DC2E8 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		1FC4B5A81F47AD2C001035B4 /* Corners.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Corners.swift; sourceTree = "<group>"; };
 		3A8AADC51DF9B85E00A2B931 /* SingleViewAppSwiftTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SingleViewAppSwiftTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A8AADC81DF9B85E00A2B931 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				1FB2AABC1F48955700E657EF /* EventProvider.swift */,
 				1FB93A6E1F4BBA29009DC2E8 /* ColorProvider.swift */,
 				1FB2AAC01F48BF3300E657EF /* EventData.plist */,
+				1FB93A701F4CF402009DC2E8 /* WebViewController.swift */,
 			);
 			name = BoutTime;
 			path = SingleViewAppSwiftTemplate;
@@ -275,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FB2AABD1F48955700E657EF /* EventProvider.swift in Sources */,
+				1FB93A711F4CF403009DC2E8 /* WebViewController.swift in Sources */,
 				1FB93A6F1F4BBA29009DC2E8 /* ColorProvider.swift in Sources */,
 				3A8AADCB1DF9B85E00A2B931 /* ViewController.swift in Sources */,
 				1FC4B5A91F47AD2C001035B4 /* Corners.swift in Sources */,
