@@ -45,12 +45,9 @@ struct RoundList: EventList {
 
 struct MasterEventList: EventList {
     var listOfEvents: [Event]
-    var questionsAsked: Int = 0
-    
-    mutating func randomRound() throws -> RoundList {
-        if questionsAsked > self.listOfEvents.count - 4 {
-            throw ListError.insufficientQuestions
-        }
+  
+    mutating func randomRound() -> RoundList {
+
         var roundEventList: [Event] = []
         while roundEventList.count < 4 {
             var randomIndex = GKRandomSource.sharedRandom().nextInt(upperBound: listOfEvents.count)
@@ -58,10 +55,14 @@ struct MasterEventList: EventList {
                 randomIndex = GKRandomSource.sharedRandom().nextInt(upperBound: listOfEvents.count)
             }
             self.listOfEvents[randomIndex].shownBefore = true
-            questionsAsked += 1
             roundEventList.append(listOfEvents[randomIndex])
         }
         return RoundList(listOfEvents: roundEventList)
+    }
+    mutating func newGameReset() {
+        for index in 0..<listOfEvents.count {
+            self.listOfEvents[index].shownBefore = false
+        }
     }
     
 }

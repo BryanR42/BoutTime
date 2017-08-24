@@ -8,14 +8,20 @@
 
 import UIKit
 
-class WebViewController: UIViewController {
-
+class WebViewController: UIViewController, UIWebViewDelegate {
+    var urlString: String!
+    
     @IBOutlet weak var EventWebView: UIWebView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        EventWebView.delegate = self
+        if let url = URL(string: urlString) {
+            let request = URLRequest(url: url)
+            EventWebView.loadRequest(request)
+        }
         // Do any additional setup after loading the view.
     }
 
@@ -36,6 +42,24 @@ class WebViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+ 
 
+    func loadWebPage(at urlString: String) {
+        let url = URL(string: urlString)
+        if let unwrappedUrl = url {
+            let request = URLRequest(url: unwrappedUrl)
+            let session = URLSession.shared
+     
+            let task = session.dataTask(with: unwrappedUrl, completionHandler: { (data, response, error) in
+                if error == nil {
+                    self.EventWebView.loadRequest(request)
+                } else {
+                    print("ERROR: \(error)")
+                }
+            })
+            task.resume
+        }
+    }
+ 
+ */
 }

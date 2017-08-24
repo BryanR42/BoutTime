@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -55,7 +56,7 @@
                                                     <color key="titleColor" red="0.1927267909" green="0.44979959730000002" blue="0.56697750089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="LwE-Rw-rAd" kind="presentation" id="bRm-7F-MTA"/>
+                                                    <action selector="eventButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nqV-SG-yFG"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgt-VR-Uwa">
@@ -79,6 +80,9 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="260" height="107"/>
                                                 <color key="backgroundColor" red="0.99991267920000004" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Event Button Two"/>
+                                                <connections>
+                                                    <action selector="eventButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X6z-63-KVT"/>
+                                                </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Cmo-T6-nrh">
                                                 <rect key="frame" x="260" y="0.0" width="43" height="107"/>
@@ -115,6 +119,9 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="260" height="107.5"/>
                                                 <color key="backgroundColor" red="0.99991267920000004" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Event Button Three"/>
+                                                <connections>
+                                                    <action selector="eventButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BDG-6W-AEw"/>
+                                                </connections>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="cNo-Py-kYt">
                                                 <rect key="frame" x="260" y="0.0" width="43" height="107.5"/>
@@ -151,6 +158,9 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="260" height="107"/>
                                                 <color key="backgroundColor" red="0.99991267920000004" green="1" blue="0.99988144639999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <state key="normal" title="Event Button Four"/>
+                                                <connections>
+                                                    <action selector="eventButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1d3-Kz-1hH"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yhb-61-i7e">
                                                 <rect key="frame" x="260" y="0.0" width="43" height="107"/>
@@ -201,16 +211,18 @@
                         <outlet property="endRoundButton" destination="Cqf-Ka-4Lg" id="cgq-Py-gEs"/>
                         <outlet property="shakeLabel" destination="LHF-ro-icq" id="Coi-vW-Odn"/>
                         <outlet property="timerLabel" destination="Hn2-8J-fZ3" id="LPC-D0-Quo"/>
+                        <segue destination="LwE-Rw-rAd" kind="presentation" identifier="WebSegue" id="jX0-Vi-xW4"/>
+                        <segue destination="tyU-od-dWT" kind="presentation" identifier="EndGameSegue" id="aX1-iF-EYX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.23188405797103" y="138.58695652173915"/>
         </scene>
-        <!--Web View Controller-->
+        <!--WebViewController-->
         <scene sceneID="tPd-je-beT">
             <objects>
-                <viewController id="LwE-Rw-rAd" customClass="WebViewController" customModule="SingleViewAppSwiftTemplate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LwE-Rw-rAd" userLabel="WebViewController" customClass="WebViewController" customModule="SingleViewAppSwiftTemplate" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zc5-Os-hiP"/>
                         <viewControllerLayoutGuide type="bottom" id="u4d-3f-lL7"/>
@@ -253,6 +265,61 @@
             </objects>
             <point key="canvasLocation" x="1032.8" y="137.18140929535232"/>
         </scene>
+        <!--End Game View-->
+        <scene sceneID="Bub-0E-14f">
+            <objects>
+                <viewController id="tyU-od-dWT" customClass="EndGameView" customModule="SingleViewAppSwiftTemplate" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XJa-Kn-1MC"/>
+                        <viewControllerLayoutGuide type="bottom" id="gQf-rx-h2k"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CJS-qB-ite">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4/6" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a44-j6-kAK">
+                                <rect key="frame" x="154" y="309" width="66" height="50.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="42"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Score" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qgh-mK-aGp">
+                                <rect key="frame" x="36" y="263" width="303" height="26"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
+                                <color key="textColor" red="0.1927267909" green="0.44979959730000002" blue="0.56697750089999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0dv-tJ-QIZ">
+                                <rect key="frame" x="113" y="379.5" width="149.5" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="0dv-tJ-QIZ" secondAttribute="height" multiplier="3:1" id="C63-Nn-Nc2"/>
+                                </constraints>
+                                <state key="normal" image="play_again"/>
+                                <connections>
+                                    <action selector="playAgainButton:" destination="tyU-od-dWT" eventType="touchUpInside" id="KW7-8q-fY7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.035294117647058823" green="0.16068699955940247" blue="0.29582324624061584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="0dv-tJ-QIZ" firstAttribute="centerX" secondItem="CJS-qB-ite" secondAttribute="centerX" id="LG9-T3-FwH"/>
+                            <constraint firstItem="a44-j6-kAK" firstAttribute="top" secondItem="Qgh-mK-aGp" secondAttribute="bottom" constant="20" id="XZg-nN-CYJ"/>
+                            <constraint firstItem="0dv-tJ-QIZ" firstAttribute="top" secondItem="a44-j6-kAK" secondAttribute="bottom" constant="20" id="eFz-ba-Gkg"/>
+                            <constraint firstItem="a44-j6-kAK" firstAttribute="centerX" secondItem="CJS-qB-ite" secondAttribute="centerX" id="gXi-1a-2ef"/>
+                            <constraint firstItem="Qgh-mK-aGp" firstAttribute="leading" secondItem="CJS-qB-ite" secondAttribute="leadingMargin" constant="20" id="jjL-EP-wab"/>
+                            <constraint firstItem="a44-j6-kAK" firstAttribute="centerY" secondItem="CJS-qB-ite" secondAttribute="centerY" id="kSr-mn-xpR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Qgh-mK-aGp" secondAttribute="trailing" constant="20" id="l24-y1-aIq"/>
+                            <constraint firstAttribute="width" secondItem="0dv-tJ-QIZ" secondAttribute="width" multiplier="2.5" constant="1" id="yg3-ig-TQY"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="scoreLabel" destination="a44-j6-kAK" id="nph-oE-Ady"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kbJ-Jb-xwu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="302" y="881"/>
+        </scene>
     </scenes>
     <resources>
         <image name="down_full" width="158" height="457"/>
@@ -260,6 +327,7 @@
         <image name="down_half" width="158" height="229"/>
         <image name="down_half_selected" width="158" height="229"/>
         <image name="next_round_success" width="558" height="142"/>
+        <image name="play_again" width="450" height="142"/>
         <image name="up_full" width="158" height="457"/>
         <image name="up_full_selected" width="158" height="457"/>
         <image name="up_half" width="158" height="229"/>

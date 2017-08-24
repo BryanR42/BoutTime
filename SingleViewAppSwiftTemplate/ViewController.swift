@@ -36,14 +36,15 @@ class ViewController: UIViewController {
     var currentRoundEvents = RoundList(listOfEvents: [])
     var countDownClock: Int = 0
     var timer = Timer()
-    
+    var buttonArray: [UIButton] = []
+    var urlString: String?
     
     // importing the Plist for the list of events
     required init?(coder aDecoder: NSCoder) {
         do {
             let dictionary = try PlistConverter.dictionary(fromFile: "EventData", ofType: "plist")
             let listOfEvents = try EventListUnarchiver.eventList(fromDictionary: dictionary)
-            self.listOfEvents = MasterEventList(listOfEvents: listOfEvents, questionsAsked: 0)
+            self.listOfEvents = MasterEventList(listOfEvents: listOfEvents)
         } catch let error {
             fatalError("\(error)")
         }
@@ -54,8 +55,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        buttonArray = [eventButton1, eventButton2, eventButton3, eventButton4]
         newRound()
         
+
         
     }
     
@@ -73,6 +76,7 @@ class ViewController: UIViewController {
         up2Button.round(corners: .topRight, radius: radii)
         up3Button.round(corners: .topRight, radius: radii)
         up4Button.round(corners: [.topRight,.bottomRight], radius: radii)
+
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -95,39 +99,37 @@ class ViewController: UIViewController {
     
     // set up a new round. Get 4 random events, start timer and update display
     func newRound() {
-        do {
-        currentRoundEvents = try listOfEvents.randomRound()
+        currentRoundEvents = listOfEvents.randomRound()
         currentAnswerKey = currentRoundEvents.sortEvents(in: currentRoundEvents)
         currentRoundNumber += 1
         endRoundButton.isHidden = true
         endRoundButton.isEnabled = false
-
+        shakeLabel.text = "Shake to complete"
         updateButtonDisplay()
         
-        countDownClock = 30
+        countDownClock = 60
         timerLabel.isHidden = false
         timerLabel.text = String("1:00")
         timer = Timer.scheduledTimer(timeInterval: 1, target:self, selector: #selector(ViewController.updateTimer), userInfo: nil, repeats: true)
-        } catch let error {
-            fatalError("\(error)")
-        }
+        
     }
     // loop through each event and compare with the sorted answer key. Any wrong answer = fail
     // color the buttons so the player knows which events are out of order
     func checkAnswers() {
         timer.invalidate()
         timerLabel.isHidden = true
-        let buttons = [eventButton1, eventButton2, eventButton3, eventButton4]
+        shakeLabel.text = "Tap an Event for more info"
         var passed: Bool = true
         for i in 0..<currentRoundEvents.listOfEvents.count {
+            buttonArray[i].isEnabled = true
             if currentRoundEvents.listOfEvents[i].eventName != currentAnswerKey.listOfEvents[i].eventName {
                 passed = false
                 endRoundButton.setImage(#imageLiteral(resourceName: "next_round_fail"), for: .normal)
-                buttons[i]?.setTitleColor(colorProvider.getUIColor(for: ColorNames.Black), for: .normal)
-                buttons[i]?.backgroundColor = colorProvider.getUIColor(for: ColorNames.Red)
+                buttonArray[i].setTitleColor(colorProvider.getUIColor(for: ColorNames.Black), for: .normal)
+                buttonArray[i].backgroundColor = colorProvider.getUIColor(for: ColorNames.Red)
             } else {
-                buttons[i]?.setTitleColor(colorProvider.getUIColor(for: ColorNames.Black), for: .normal)
-                buttons[i]?.backgroundColor = colorProvider.getUIColor(for: ColorNames.Green)
+                buttonArray[i].setTitleColor(colorProvider.getUIColor(for: ColorNames.Black), for: .normal)
+                buttonArray[i].backgroundColor = colorProvider.getUIColor(for: ColorNames.Green)
                 if i == currentRoundEvents.listOfEvents.count - 1 && passed == true {
                     endRoundButton.setImage(#imageLiteral(resourceName: "next_round_success"), for: .normal)
                     score += 1
@@ -137,6 +139,25 @@ class ViewController: UIViewController {
         endRoundButton.isHidden = false
         endRoundButton.isEnabled = true
     }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "WebSegue" {
+            if let toViewController = segue.destination as? WebViewController {
+                toViewController.urlString = urlString
+            }
+        }
+    }
+
+    @IBAction func eventButton(_ sender: UIButton) {
+        if let index = buttonArray.index(of: sender) {
+        urlString = currentRoundEvents.listOfEvents[index].webAddress
+        }
+
+
+        performSegue(withIdentifier: "WebSegue", sender: self)
+    }
+
+
     // update the current round event list when the reordering buttons are pressed
     @IBAction func reorderButton(_ sender: UIButton) {
         switch sender {
@@ -151,7 +172,6 @@ class ViewController: UIViewController {
         updateButtonDisplay()
     }
     
-    
     @IBAction func EndRound() {
         if currentRoundNumber < numberOfRounds {
             newRound()
@@ -162,15 +182,22 @@ class ViewController: UIViewController {
         
     }
     
+    func newGame() {
+        listOfEvents.newGameReset()
+        
+        
+    }
+    
+    
 // Helper Functions
     
     // update the display
     func updateButtonDisplay() {
-        let buttons: [UIButton] = [eventButton1, eventButton2, eventButton3, eventButton4]
         // reset each button to the current event order and reset button colors.
-        for eachButton in buttons {
-            if let index = buttons.index(of: eachButton) {
+        for eachButton in buttonArray {
+            if let index = buttonArray.index(of: eachButton) {
                 eachButton.setTitle(currentRoundEvents.listOfEvents[index].eventName, for: .normal)
+                eachButton.isEnabled = false
             }
             eachButton.setTitleColor(colorProvider.getUIColor(for: ColorNames.Teal), for: .normal)
             eachButton.backgroundColor = colorProvider.getUIColor(for: ColorNames.White)
