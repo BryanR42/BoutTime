@@ -9,25 +9,23 @@
 import Foundation
 import GameKit
 
-
+// custom types
 protocol SingleEvent {
     var eventName: String { get }
     var eventDate: Date { get }
     var webAddress: String { get }
-    var shownBefore: Bool { get set }
 
 }
 struct Event: SingleEvent {
     var eventName: String
     var eventDate: Date
     var webAddress: String
-    var shownBefore: Bool = false
     
 }
 protocol EventList {
     var listOfEvents: [Event] { get set }
-    
 }
+
 struct RoundList: EventList {
     var listOfEvents: [Event]
     
@@ -51,16 +49,20 @@ struct MasterEventList: EventList {
         var roundEventList: [Event] = []
         while roundEventList.count < 4 {
             let randomIndex = GKRandomSource.sharedRandom().nextInt(upperBound: listOfEvents.count)
-            self.listOfEvents[randomIndex].shownBefore = true
-            roundEventList.append(listOfEvents[randomIndex])
-            self.listOfEvents.remove(at: randomIndex)
+    // move the event into the roundlist and remove it from the masterlist so it won't be shown again
+            roundEventList.append(self.listOfEvents.remove(at: randomIndex))
+         
         }
         return RoundList(listOfEvents: roundEventList)
     }
-    mutating func newGameReset(){
+    
+    // reload all the events so we can start another game
+    mutating func newGameReset() {
         do {
             let dictionary = try PlistConverter.dictionary(fromFile: "EventData", ofType: "plist")
             listOfEvents = try EventListUnarchiver.eventList(fromDictionary: dictionary)
+        } catch ListError.conversionFailure {
+            print("Event list failed to convert")
         } catch let error {
             fatalError("\(error)")
         }
@@ -72,9 +74,9 @@ struct MasterEventList: EventList {
 enum ListError: Error {
     case invalidFile
     case conversionFailure
-    case insufficientQuestions
+    case invalidEvent
 }
-
+// functions to extract the events from the Plist
 class PlistConverter {
     static func dictionary(fromFile name: String, ofType type: String) throws -> [[String: Any]] {
         guard let path = Bundle.main.path(forResource: name, ofType: type) else {
@@ -93,16 +95,16 @@ class EventListUnarchiver {
         for value in dictionary {
             let eventDictionary = value
             if let eventName = eventDictionary["name"] as? String, let eventDate = eventDictionary["date"] as? Date, let webAddress = eventDictionary["url"] as? String {
-                let event = Event(eventName: eventName, eventDate: eventDate, webAddress: webAddress, shownBefore: false)
-                
-                
+                let event = Event(eventName: eventName, eventDate: eventDate, webAddress: webAddress)
                 listOfEvents.append(event)
+            } else {
+                throw ListError.invalidEvent
             }
         }
     return listOfEvents
     }
 }
-
+// helper function for sorting the answer key
 func findEarliest(in list: [Event]) -> Int {
     var earliestIndex = 0
     for i in 1..<list.count {

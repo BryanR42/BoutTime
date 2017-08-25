@@ -38,7 +38,7 @@ class ViewController: UIViewController {
     var timer = Timer()
     var buttonArray: [UIButton] = []
     var urlString: String?
-    
+ 
     // importing the Plist for the list of events
     required init?(coder aDecoder: NSCoder) {
         do {
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         buttonArray = [eventButton1, eventButton2, eventButton3, eventButton4]
-        newRound()
+        newGame()
         
 
         
@@ -84,7 +84,7 @@ class ViewController: UIViewController {
     }
     
     @IBOutlet weak var shakeLabel: UILabel!
-    
+    // respond to shake if the timer is running/shown
     override func becomeFirstResponder() -> Bool {
         return true
     }
@@ -97,7 +97,7 @@ class ViewController: UIViewController {
     }
     
     
-    // set up a new round. Get 4 random events, start timer and update display
+    // set up a new round. Get 4 random events, sort them for an answer key, start timer and update display
     func newRound() {
         currentRoundEvents = listOfEvents.randomRound()
         currentAnswerKey = currentRoundEvents.sortEvents(in: currentRoundEvents)
@@ -114,7 +114,7 @@ class ViewController: UIViewController {
         
     }
     // loop through each event and compare with the sorted answer key. Any wrong answer = fail
-    // color the buttons so the player knows which events are out of order
+    // color the buttons so the player knows which events are out of order also enable the buttons to open the web viewer
     func checkAnswers() {
         timer.invalidate()
         timerLabel.isHidden = true
@@ -139,6 +139,8 @@ class ViewController: UIViewController {
         endRoundButton.isHidden = false
         endRoundButton.isEnabled = true
     }
+    
+    // helper functions to pass variables to the other view controllers
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "WebSegue" {
@@ -152,7 +154,7 @@ class ViewController: UIViewController {
             }
         }
     }
-
+    // in between rounds the event buttons will be active to open the webview
     @IBAction func eventButton(_ sender: UIButton) {
         if let index = buttonArray.index(of: sender) {
         urlString = currentRoundEvents.listOfEvents[index].webAddress
@@ -181,17 +183,19 @@ class ViewController: UIViewController {
         if currentRoundNumber < numberOfRounds {
             newRound()
         } else {
-            // FIXME: End game sequence
+            // end game sequence
             performSegue(withIdentifier: "EndGameSegue", sender: self)
             
         }
         
         
     }
+    // this is where the end game view controller gets dismissed to run a new game
     @IBAction func unwindToThisViewController(segue: UIStoryboardSegue) {
         //Insert function to be run upon dismiss of VC2
         newGame()
     }
+    // reload the masterlist so we can play again
     func newGame() {
         listOfEvents.newGameReset()
         currentRoundNumber = 0
@@ -204,7 +208,7 @@ class ViewController: UIViewController {
     
     // update the display
     func updateButtonDisplay() {
-        // reset each button to the current event order and reset button colors.
+        // reset each button to the current event order, disable the webview and reset button colors.
         for eachButton in buttonArray {
             if let index = buttonArray.index(of: eachButton) {
                 eachButton.setTitle(currentRoundEvents.listOfEvents[index].eventName, for: .normal)

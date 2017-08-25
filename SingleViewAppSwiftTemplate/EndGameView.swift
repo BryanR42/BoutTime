@@ -15,8 +15,9 @@ class EndGameView: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        scoreLabel.text = scoreText
         // Do any additional setup after loading the view.
+        // show the score label.
+        scoreLabel.text = scoreText
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,6 +25,7 @@ class EndGameView: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // dismiss function is handled by the parent ViewController
 
     /*
     // MARK: - Navigation

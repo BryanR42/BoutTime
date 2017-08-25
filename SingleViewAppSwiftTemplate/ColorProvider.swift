@@ -7,7 +7,7 @@
 //
 
 import UIKit
-// simple struct to change some colors around
+// simple struct copied from a prior project to change some colors around
 
 enum ColorNames: String {
     case White, Teal, Yellow, Red, Orange, Dark, Purple, Green, Black

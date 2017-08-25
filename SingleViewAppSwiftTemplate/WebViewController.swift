@@ -16,13 +16,15 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Do any additional setup after loading the view.
         
+        // convert the passed string into a URL and load it into the webview
         EventWebView.delegate = self
         if let url = URL(string: urlString) {
             let request = URLRequest(url: url)
             EventWebView.loadRequest(request)
         }
-        // Do any additional setup after loading the view.
+
     }
 
     override func didReceiveMemoryWarning() {
