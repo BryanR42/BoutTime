@@ -50,19 +50,21 @@ struct MasterEventList: EventList {
 
         var roundEventList: [Event] = []
         while roundEventList.count < 4 {
-            var randomIndex = GKRandomSource.sharedRandom().nextInt(upperBound: listOfEvents.count)
-            while self.listOfEvents[randomIndex].shownBefore == true {
-                randomIndex = GKRandomSource.sharedRandom().nextInt(upperBound: listOfEvents.count)
-            }
+            let randomIndex = GKRandomSource.sharedRandom().nextInt(upperBound: listOfEvents.count)
             self.listOfEvents[randomIndex].shownBefore = true
             roundEventList.append(listOfEvents[randomIndex])
+            self.listOfEvents.remove(at: randomIndex)
         }
         return RoundList(listOfEvents: roundEventList)
     }
-    mutating func newGameReset() {
-        for index in 0..<listOfEvents.count {
-            self.listOfEvents[index].shownBefore = false
+    mutating func newGameReset(){
+        do {
+            let dictionary = try PlistConverter.dictionary(fromFile: "EventData", ofType: "plist")
+            listOfEvents = try EventListUnarchiver.eventList(fromDictionary: dictionary)
+        } catch let error {
+            fatalError("\(error)")
         }
+
     }
     
 }

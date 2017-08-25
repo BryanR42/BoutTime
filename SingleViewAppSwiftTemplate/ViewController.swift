@@ -146,6 +146,11 @@ class ViewController: UIViewController {
                 toViewController.urlString = urlString
             }
         }
+        if segue.identifier == "EndGameSegue" {
+            if let toViewController = segue.destination as? EndGameView {
+                toViewController.scoreText = "\(score)/\(numberOfRounds)"
+            }
+        }
     }
 
     @IBAction func eventButton(_ sender: UIButton) {
@@ -177,15 +182,21 @@ class ViewController: UIViewController {
             newRound()
         } else {
             // FIXME: End game sequence
+            performSegue(withIdentifier: "EndGameSegue", sender: self)
+            
         }
         
         
     }
-    
+    @IBAction func unwindToThisViewController(segue: UIStoryboardSegue) {
+        //Insert function to be run upon dismiss of VC2
+        newGame()
+    }
     func newGame() {
         listOfEvents.newGameReset()
-        
-        
+        currentRoundNumber = 0
+        score = 0
+        newRound()
     }
     
     

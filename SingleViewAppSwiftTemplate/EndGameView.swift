@@ -9,12 +9,13 @@
 import UIKit
 
 class EndGameView: UIViewController {
-
+    var scoreText: String!
     @IBOutlet weak var scoreLabel: UILabel!
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        scoreLabel.text = scoreText
         // Do any additional setup after loading the view.
     }
 
@@ -23,9 +24,6 @@ class EndGameView: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func playAgainButton(_ sender: Any) {
-        
-    }
 
     /*
     // MARK: - Navigation
