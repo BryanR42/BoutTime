@@ -84,6 +84,7 @@ class ViewController: UIViewController {
     }
     
     @IBOutlet weak var shakeLabel: UILabel!
+    
     // respond to shake if the timer is running/shown
     override func becomeFirstResponder() -> Bool {
         return true
@@ -154,16 +155,14 @@ class ViewController: UIViewController {
             }
         }
     }
+    
     // in between rounds the event buttons will be active to open the webview
     @IBAction func eventButton(_ sender: UIButton) {
         if let index = buttonArray.index(of: sender) {
         urlString = currentRoundEvents.listOfEvents[index].webAddress
         }
-
-
         performSegue(withIdentifier: "WebSegue", sender: self)
     }
-
 
     // update the current round event list when the reordering buttons are pressed
     @IBAction func reorderButton(_ sender: UIButton) {
@@ -183,21 +182,19 @@ class ViewController: UIViewController {
         if currentRoundNumber < numberOfRounds {
             newRound()
         } else {
-            // end game sequence
+            // load end game if all rounds have been played
             performSegue(withIdentifier: "EndGameSegue", sender: self)
-            
         }
         
         
     }
     // this is where the end game view controller gets dismissed to run a new game
     @IBAction func unwindToThisViewController(segue: UIStoryboardSegue) {
-        //Insert function to be run upon dismiss of VC2
         newGame()
     }
-    // reload the masterlist so we can play again
+    
+    // reset the score and round counter then call for a new round to start the next game
     func newGame() {
-        listOfEvents.newGameReset()
         currentRoundNumber = 0
         score = 0
         newRound()
@@ -221,12 +218,8 @@ class ViewController: UIViewController {
     
     func updateTimer() {
         countDownClock -= 1
-        // need to learn a formatting option?
-        if countDownClock < 10 {
-            timerLabel.text = "0:0\(countDownClock)"
-        } else {
-            timerLabel.text = "0:\(countDownClock)"
-        }
+            let stringClock = String(format: "%02d", countDownClock)
+            timerLabel.text = "0:\(stringClock)"
         // time runs out, stop the clock and fire the answer checker
         if countDownClock == 0 {
             checkAnswers()

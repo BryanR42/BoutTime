@@ -16,8 +16,7 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
+       
         // convert the passed string into a URL and load it into the webview
         EventWebView.delegate = self
         if let url = URL(string: urlString) {
@@ -35,11 +34,4 @@ class WebViewController: UIViewController, UIWebViewDelegate {
     @IBAction func dismiss() {
         dismiss(animated: true, completion: nil)
     }
-    /*
-    // MARK: - Navigation
-
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
- 
-     */
 }

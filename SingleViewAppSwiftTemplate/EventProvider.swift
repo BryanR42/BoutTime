@@ -14,14 +14,22 @@ protocol SingleEvent {
     var eventName: String { get }
     var eventDate: Date { get }
     var webAddress: String { get }
-
+    
 }
-struct Event: SingleEvent {
+struct Event: SingleEvent, Equatable {
     var eventName: String
     var eventDate: Date
     var webAddress: String
     
+    static func ==(lhs: Event, rhs: Event) -> Bool {
+    if lhs.eventName == rhs.eventName && lhs.eventDate == rhs.eventDate && lhs.webAddress == rhs.webAddress {
+    return true
+    } else {
+        return false
+        }
+    }
 }
+
 protocol EventList {
     var listOfEvents: [Event] { get set }
 }
@@ -49,26 +57,13 @@ struct MasterEventList: EventList {
         var roundEventList: [Event] = []
         while roundEventList.count < 4 {
             let randomIndex = GKRandomSource.sharedRandom().nextInt(upperBound: listOfEvents.count)
-    // move the event into the roundlist and remove it from the masterlist so it won't be shown again
-            roundEventList.append(self.listOfEvents.remove(at: randomIndex))
-         
+    // move the event into the roundlist if it's not already there
+            if !roundEventList.contains(listOfEvents[randomIndex]) {
+                roundEventList.append(self.listOfEvents[randomIndex])
+            }
         }
         return RoundList(listOfEvents: roundEventList)
     }
-    
-    // reload all the events so we can start another game
-    mutating func newGameReset() {
-        do {
-            let dictionary = try PlistConverter.dictionary(fromFile: "EventData", ofType: "plist")
-            listOfEvents = try EventListUnarchiver.eventList(fromDictionary: dictionary)
-        } catch ListError.conversionFailure {
-            print("Event list failed to convert")
-        } catch let error {
-            fatalError("\(error)")
-        }
-
-    }
-    
 }
 
 enum ListError: Error {
